@@ -1,30 +1,34 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useRef} from 'react';
+import {Dimensions, ScrollView} from 'react-native';
 import * as Styles from './style';
-import Context from '../../Context';
-import {Button} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import CreatePage from './Create';
+import ViewPage from './View';
 
 const Main = () => {
-  const context = useContext(Context);
+  const width = Dimensions.get('window').width;
+  const scrollRef = useRef(null);
+
+  const scrollTo = type => {
+    if (type === 'view') {
+      return scrollRef.current.scrollTo({x: 0, y: 0, animated: true});
+    }
+    return scrollRef.current.scrollToEnd({animated: true});
+  };
 
   return (
-    <Styles.Wrapper>
-      <Styles.TitleText>{context.getDark}</Styles.TitleText>
-      <Button
-        onPress={() => {
-          context.setLoading();
-        }}
-        title="Loading!!!!!"
-      />
-
-      <Button
-        onPress={async () => {
-          await AsyncStorage.setItem('@test', 'on');
-        }}
-        title={'AsyncStorage'}
-        disabled={context.getDark === 'on' ? true : false}
-      />
-    </Styles.Wrapper>
+    <ScrollView
+      ref={scrollRef}
+      horizontal={true}
+      pagingEnabled={true}
+      showsHorizontalScrollIndicator={false}
+      scrollEnabled={false}>
+      <Styles.ScreenView width={width}>
+        <ViewPage scrollTo={scrollTo} />
+      </Styles.ScreenView>
+      <Styles.ScreenView width={width}>
+        <CreatePage scrollTo={scrollTo} />
+      </Styles.ScreenView>
+    </ScrollView>
   );
 };
 

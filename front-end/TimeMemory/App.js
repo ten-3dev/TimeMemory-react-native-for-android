@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, Appearance} from 'react-native';
 import Main from './src/Screens';
 import Loading from './src/Screens/Loading';
 import Context from './Context';
@@ -8,13 +8,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   useEffect(() => {
-    AsyncStorage.getItem('@test', (err, result) => {
-      console.log(result);
-      setIsDark(result);
-    });
+    // AsyncStorage.getItem('@test', (err, result) => {
+    //   console.log('현재 AsyncStorage의 값: ', result);
+    //   setIsDark(result);
+    // });
+    // console.log('사용자가 설정한 색상:', Appearance.getColorScheme());
     setTimeout(() => {
-      SplashScreen.hide(); // Splash screen 종료
-    }, 1000);
+      SplashScreen.hide();
+    }, 2000);
   }, []);
 
   const [isDark, setIsDark] = useState('');

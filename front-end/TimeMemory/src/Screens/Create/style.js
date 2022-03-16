@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
-export const ScreenView = styled.View`
+export const Wrapper = styled.View`
   flex: 1;
+  background-color: blue;
 `;
