@@ -12,7 +12,9 @@ const App = () => {
       console.log(result);
       setIsDark(result);
     });
-    SplashScreen.hide(); // Splash screen 종료
+    setTimeout(() => {
+      SplashScreen.hide(); // Splash screen 종료
+    }, 1000);
   }, []);
 
   const [isDark, setIsDark] = useState('');
