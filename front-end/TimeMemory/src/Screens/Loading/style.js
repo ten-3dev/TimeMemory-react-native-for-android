@@ -9,7 +9,7 @@ export const Wrapper = styled.View`
   justify-content: center;
   z-index: 2;
   display: ${props => {
-    if (props.display === true) return 'flex';
+    if (props.display) return 'flex';
     return 'none';
   }};
 `;

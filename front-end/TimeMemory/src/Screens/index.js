@@ -1,28 +1,28 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import * as Styles from './style';
 import Context from '../../Context';
 import {Button} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Main = () => {
   const context = useContext(Context);
 
   return (
     <Styles.Wrapper>
-      <Styles.TitleText>{context.getDark ? 'true' : 'false'}</Styles.TitleText>
-      <Styles.TitleText>
-        {context.getLoading ? 'true' : 'false'}
-      </Styles.TitleText>
-      <Button
-        onPress={() => {
-          context.setDark();
-        }}
-        title="Press Me!"
-      />
+      <Styles.TitleText>{context.getDark}</Styles.TitleText>
       <Button
         onPress={() => {
           context.setLoading();
         }}
         title="Loading!!!!!"
+      />
+
+      <Button
+        onPress={async () => {
+          await AsyncStorage.setItem('@test', 'on');
+        }}
+        title={'AsyncStorage'}
+        disabled={context.getDark === 'on' ? true : false}
       />
     </Styles.Wrapper>
   );

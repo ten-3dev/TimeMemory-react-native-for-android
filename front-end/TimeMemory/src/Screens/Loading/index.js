@@ -6,7 +6,7 @@ const Loading = ({loading}) => {
   return (
     <Styles.Wrapper display={loading}>
       <Styles.CustomGiF source={LoadingGif} />
-      <Styles.LoadingText>로딩중</Styles.LoadingText>
+      <Styles.LoadingText>로딩중...</Styles.LoadingText>
     </Styles.Wrapper>
   );
 };

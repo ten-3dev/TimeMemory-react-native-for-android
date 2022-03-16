@@ -4,18 +4,23 @@ import Main from './src/Screens';
 import Loading from './src/Screens/Loading';
 import Context from './Context';
 import SplashScreen from 'react-native-splash-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
   useEffect(() => {
+    AsyncStorage.getItem('@test', (err, result) => {
+      console.log(result);
+      setIsDark(result);
+    });
     SplashScreen.hide(); // Splash screen 종료
   }, []);
 
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState('');
   const [isLoading, setLoading] = useState(false);
 
   const contextSetting = {
-    setDark: () => {
-      setIsDark(!isDark);
+    setDark: text => {
+      setIsDark(text);
     },
     setLoading: () => {
       setLoading(!isLoading);
