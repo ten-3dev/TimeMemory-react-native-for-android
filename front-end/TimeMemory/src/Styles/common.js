@@ -1,16 +1,6 @@
-import {useContext} from 'react';
-import Context from '../../Context';
+import styled from 'styled-components/native';
 
-const Common = type => {
-  const context = useContext(Context);
-
-  switch (type) {
-    case 'bg':
-      return {
-        flex: 1,
-        backgroundColor: context.getDark === 'dark' ? '#616161' : '#F1F1F1',
-      };
-  }
-};
-
-export default Common;
+export const Wrapper = styled.View`
+  flex: 1;
+  background-color: ${props => props.theme.color.bg};
+`;
