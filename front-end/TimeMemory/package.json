@@ -17,6 +17,7 @@
     "react": "17.0.2",
     "react-native": "0.67.3",
     "react-native-splash-screen": "^3.3.0",
+    "react-native-switch": "^1.5.1",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {

@@ -26,8 +26,8 @@ const App = () => {
   console.log(isDark);
 
   const contextSetting = {
-    setDark: () => {
-      setIsDark(!isDark);
+    setDark: bool => {
+      setIsDark(bool);
     },
     setLoading: () => {
       setLoading(!isLoading);
