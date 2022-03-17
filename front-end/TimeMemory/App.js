@@ -14,7 +14,6 @@ const App = () => {
 
   useEffect(() => {
     AsyncStorage.getItem('darkmode', (err, result) => {
-      console.log(result);
       setIsDark(result === null ? false : result === 'light' ? false : true);
     });
 
@@ -22,8 +21,6 @@ const App = () => {
       SplashScreen.hide();
     }, 2000);
   }, []);
-
-  console.log(isDark);
 
   const contextSetting = {
     setDark: bool => {

@@ -38,3 +38,17 @@ export const SwitchBox = styled.View`
 export const SwitchSec = styled.View`
   align-items: center;
 `;
+
+export const MoveBtn = styled.TouchableOpacity`
+  width: 100%;
+  height: 60px;
+  background-color: ${props => props.theme.color.btn};
+  align-items: center;
+  justify-content: center;
+`;
+
+export const MoveBtnText = styled.Text`
+  font-size: 15px;
+  font-weight: bold;
+  color: #000;
+`;
