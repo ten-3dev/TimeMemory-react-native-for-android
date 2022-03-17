@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-import {ScrollView, Text} from 'react-native';
+import React, {useContext, useState, useRef} from 'react';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
 import {Switch} from 'react-native-switch';
@@ -8,6 +7,25 @@ import Context from '../../../Context';
 
 const ViewPage = ({scrollTo}) => {
   const context = useContext(Context);
+  let scrollRef = useRef(null);
+
+  // Fake data
+  const [data] = useState([
+    {text: '123', date: '2022.03.21', time: '오후 3시 28분'},
+    {text: '456', date: '2022.03.21', time: '오후 3시 28분'},
+    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
+    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
+    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
+    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
+    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
+  ]);
+
+  const scrollToTop = () => {
+    scrollRef.scrollToOffset({
+      animated: true,
+      offset: 0,
+    });
+  };
 
   return (
     <>
@@ -50,16 +68,43 @@ const ViewPage = ({scrollTo}) => {
         />
         <Styles.RemoveBarText>슬라이드로 삭제하기</Styles.RemoveBarText>
         <Styles.ContentBox>
-          <ScrollView style={{paddingBottom: 10, boxSizing: 'border-box'}}>
-            <Styles.ItemBox></Styles.ItemBox>
-            <Styles.ItemBox></Styles.ItemBox>
-            <Styles.ItemBox></Styles.ItemBox>
-            <Styles.ItemBox></Styles.ItemBox>
-            <Styles.ItemBox></Styles.ItemBox>
-            <Styles.ToTop>
-              <Styles.ToTopText>To Top</Styles.ToTopText>
-            </Styles.ToTop>
-          </ScrollView>
+          <Styles.ScrollView
+            listViewRef={ref => (scrollRef = ref)}
+            data={data}
+            renderItem={itemData => (
+              <>
+                <Styles.ItemBox>
+                  <Styles.ItemBoxTop>
+                    <Styles.ItemBoxText>
+                      {itemData.item.date}
+                    </Styles.ItemBoxText>
+                    <Styles.ItemBoxText time>
+                      {itemData.item.time}
+                    </Styles.ItemBoxText>
+                  </Styles.ItemBoxTop>
+                  <Styles.ItemBoxBottom>
+                    <Styles.ItemBoxTitle>
+                      {itemData.item.text}
+                    </Styles.ItemBoxTitle>
+                  </Styles.ItemBoxBottom>
+                </Styles.ItemBox>
+                {itemData.index === data.length - 1 && (
+                  <Styles.ToTop onPress={scrollToTop}>
+                    <Styles.ToTopText>To Top</Styles.ToTopText>
+                  </Styles.ToTop>
+                )}
+              </>
+            )}
+            renderHiddenItem={() => (
+              <Styles.ItemRemoveView>
+                <Styles.ItemRemove>
+                  <Styles.ItemRemoveText>삭제</Styles.ItemRemoveText>
+                </Styles.ItemRemove>
+              </Styles.ItemRemoveView>
+            )}
+            rightOpenValue={-103}
+            disableRightSwipe={true}
+          />
         </Styles.ContentBox>
       </Common.Wrapper>
       <Common.MoveBtn onPress={() => scrollTo('create')}>

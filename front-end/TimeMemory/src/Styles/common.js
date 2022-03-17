@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 
 export const Wrapper = styled.View`
   flex: 1;
-  background-color: ${props => props.theme.color.bg};
   padding-left: 8px;
   padding-right: 8px;
   box-sizing: border-box;
