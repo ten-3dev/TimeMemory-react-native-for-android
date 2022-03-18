@@ -4,6 +4,9 @@ export const light = {
     title: '#000000',
     btn: '#e4e4e4',
     item: '#FFFFFF',
+    dateTimeTitle: '#000000',
+    dateTime: '#686868',
+    input: '#000000',
   },
 };
 
@@ -13,5 +16,8 @@ export const dark = {
     title: '#EFEFEF',
     btn: '#cbcbcb',
     item: '#8D8D8D',
+    dateTimeTitle: '#FFFFFF',
+    dateTime: '#E1E1E1',
+    input: '#ffffff',
   },
 };

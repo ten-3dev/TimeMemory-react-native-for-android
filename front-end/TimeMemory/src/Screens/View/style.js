@@ -1,3 +1,4 @@
+import {Dimensions} from 'react-native';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {SwipeListView} from 'react-native-swipe-list-view';
@@ -16,7 +17,24 @@ export const RemoveBarText = styled.Text`
   font-weight: bold;
   color: ${props => props.theme.color.title};
   margin-top: 2px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+`;
+
+export const SwitchText = styled.Text`
+  font-size: 9px;
+  font-weight: bold;
+  color: ${props => props.theme.color.title};
+  margin-top: 5px;
+  margin-bottom: 3px;
+`;
+
+export const SwitchBox = styled.View`
+  width: 100%;
+  align-items: flex-end;
+`;
+
+export const SwitchSec = styled.View`
+  align-items: center;
 `;
 
 export const ContentBox = styled.View`
@@ -28,52 +46,8 @@ export const ScrollView = styled(SwipeListView)`
   box-sizing: border-box;
 `;
 
-export const ItemBox = styled.View`
-  width: 100%;
-  height: 97px;
-  border-radius: 5px;
-  background-color: ${props => props.theme.color.item};
-  margin-bottom: 12px;
-  padding-left: 8px;
-  padding-right: 8px;
-`;
-
-export const ItemBoxTop = styled.View`
-  width: 100%;
-  height: 25px;
-  justify-content: space-between;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const ItemBoxTopDate = styled.Text`
-  font-size: 18px;
-  font-weight: bold;
-`;
-
-export const ItemBoxText = styled.Text`
-  font-size: ${props => {
-    if (props.time) return '12px';
-    return '16px';
-  }};
-  font-weight: bold;
-  color: ${props => props.theme.color.title};
-`;
-
-export const ItemBoxBottom = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const ItemBoxTitle = styled.Text`
-  font-size: 25px;
-  font-weight: bold;
-  color: ${props => props.theme.color.title};
-  margin-top: -25px;
-`;
-
 export const ItemRemoveView = styled.View`
+  width: ${Dimensions.get('window').width - 8}px;
   height: 97px;
   align-items: flex-end;
 `;
@@ -91,19 +65,4 @@ export const ItemRemoveText = styled.Text`
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-`;
-
-export const ToTop = styled.TouchableOpacity`
-  width: 100%;
-  height: 30px;
-  background-color: gray;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-`;
-
-export const ToTopText = styled.Text`
-  font-size: 11px;
-  font-weight: bold;
-  color: whitesmoke;
 `;
