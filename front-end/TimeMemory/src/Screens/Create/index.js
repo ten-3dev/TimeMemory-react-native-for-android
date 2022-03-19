@@ -42,7 +42,7 @@ const CreatePage = ({navigation}) => {
           </Common.ItemBox>
         </Styles.PreViewBox>
         <Common.MoveBtn onPress={() => navigation.goBack()}>
-          <Common.MoveBtnText>뒤로 가기</Common.MoveBtnText>
+          <Common.MoveBtnText>완료하기</Common.MoveBtnText>
         </Common.MoveBtn>
       </Styles.ContentBox>
     </Common.Wrapper>
