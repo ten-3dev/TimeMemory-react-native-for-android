@@ -13,19 +13,19 @@ export const RemoveBar = styled(LinearGradient)`
 export const RemoveBarText = styled.Text`
   width: 100%;
   text-align: right;
-  font-size: 9px;
-  font-weight: bold;
+  font-size: 12px;
   color: ${props => props.theme.color.title};
-  margin-top: 2px;
+  margin-top: 4px;
   margin-bottom: 10px;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const SwitchText = styled.Text`
-  font-size: 9px;
-  font-weight: bold;
+  font-size: 10px;
   color: ${props => props.theme.color.title};
   margin-top: 5px;
   margin-bottom: 3px;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const SwitchBox = styled.View`
@@ -62,7 +62,8 @@ export const ItemRemove = styled.TouchableOpacity`
 `;
 
 export const ItemRemoveText = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   color: #fff;
+  font-family: 'DoHyeon-Regular';
 `;

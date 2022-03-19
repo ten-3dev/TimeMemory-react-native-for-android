@@ -6,36 +6,36 @@ export const DateTimeBox = styled.View`
 `;
 
 export const DateTimeTitle = styled.Text`
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 17px;
   margin-top: 30px;
   color: ${props => props.theme.color.dateTimeTitle};
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const DateTimeText = styled.Text`
   font-size: 15px;
-  font-weight: bold;
   margin-top: 5px;
   color: ${props => props.theme.color.dateTime};
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const InputText = styled.Text`
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 17px;
   margin-bottom: 5px;
   color: ${props => props.theme.color.input};
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const Input = styled.TextInput`
-  height: 35px;
+  height: 40px;
   background-color: #ffffff;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 16px;
   padding: 0;
   padding-left: 10px;
   padding-right: 10px;
-  font-weight: bold;
   margin-bottom: 15px;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const WarningBox = styled.View`
@@ -51,15 +51,15 @@ export const WarningBox = styled.View`
 `;
 
 export const WarningTitle = styled.Text`
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 15px;
   color: #de3535;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const WarningText = styled.Text`
-  font-size: 10px;
-  font-weight: bold;
+  font-size: 14px;
   color: #000;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const ContentBox = styled.View`
@@ -71,7 +71,7 @@ export const PreViewBox = styled.View``;
 
 export const PreViewTitle = styled.Text`
   font-size: 13px;
-  font-weight: bold;
   margin-bottom: 4px;
   margin-left: 8px;
+  font-family: 'mainFont';
 `;

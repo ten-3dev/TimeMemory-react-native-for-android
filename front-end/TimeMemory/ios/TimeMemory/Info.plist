@@ -54,6 +54,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>MainFont.ttf</string>
+		<string>mainFont.ttf</string>
+		<string>DoHyeon-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -12,6 +12,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="#FCFCFC"
+        android:fontFamily="@font/main_font"
         android:text="@string/splash_name"/>
 
 </LinearLayout>

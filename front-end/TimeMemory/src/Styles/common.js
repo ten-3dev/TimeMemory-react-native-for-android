@@ -14,16 +14,16 @@ export const SpaceView = styled.View`
 
 export const Title = styled.Text`
   font-size: 32px;
-  font-weight: bold;
   color: ${props => props.theme.color.title};
   margin-top: 5px;
+  font-family: 'mainFont';
 `;
 
 export const SubTitle = styled.Text`
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 14px;
   color: ${props => props.theme.color.title};
   margin-top: 5px;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const ItemBox = styled.View`
@@ -52,11 +52,11 @@ export const ItemBoxTopDate = styled.Text`
 
 export const ItemBoxText = styled.Text`
   font-size: ${props => {
-    if (props.time) return '12px';
-    return '16px';
+    if (props.time) return '14px';
+    return '18px';
   }};
-  font-weight: bold;
   color: ${props => props.theme.color.title};
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const ItemBoxBottom = styled.View`
@@ -67,9 +67,9 @@ export const ItemBoxBottom = styled.View`
 
 export const ItemBoxTitle = styled.Text`
   font-size: 25px;
-  font-weight: bold;
   color: ${props => props.theme.color.title};
   margin-top: -25px;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const MoveBtn = styled.TouchableOpacity`
@@ -81,9 +81,9 @@ export const MoveBtn = styled.TouchableOpacity`
 `;
 
 export const MoveBtnText = styled.Text`
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 16px;
   color: #000;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const shadowIOS = {
