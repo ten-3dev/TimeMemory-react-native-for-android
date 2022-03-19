@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef} from 'react';
+import React, {useContext, useState} from 'react';
 import {Platform} from 'react-native';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
@@ -6,9 +6,8 @@ import {Switch} from 'react-native-switch';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Context from '../../../Context';
 
-const ViewPage = ({scrollTo}) => {
+const ViewPage = ({navigation}) => {
   const context = useContext(Context);
-  let scrollRef = useRef(null);
 
   // Fake data
   const [data] = useState([
@@ -20,13 +19,6 @@ const ViewPage = ({scrollTo}) => {
     {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
     {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
   ]);
-
-  const scrollToTop = () => {
-    scrollRef.scrollToOffset({
-      animated: true,
-      offset: 0,
-    });
-  };
 
   return (
     <Common.Wrapper>
@@ -100,11 +92,12 @@ const ViewPage = ({scrollTo}) => {
           rightOpenValue={-108}
           disableRightSwipe={true}
         />
+        <Common.MoveBtn onPress={() => navigation.navigate('Create')}>
+          <Common.MoveBtnText>클릭하여 기록 생성하기</Common.MoveBtnText>
+        </Common.MoveBtn>
       </Styles.ContentBox>
-      <Common.MoveBtn onPress={() => scrollTo('create')}>
-        <Common.MoveBtnText>클릭하여 기록 생성하기</Common.MoveBtnText>
-      </Common.MoveBtn>
     </Common.Wrapper>
   );
 };
+
 export default ViewPage;

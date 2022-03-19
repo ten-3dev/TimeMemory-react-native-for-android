@@ -14,6 +14,7 @@ const App = () => {
 
   useEffect(() => {
     AsyncStorage.getItem('darkmode', (err, result) => {
+      if (err) throw err;
       setIsDark(result === null ? false : result === 'light' ? false : true);
     });
 

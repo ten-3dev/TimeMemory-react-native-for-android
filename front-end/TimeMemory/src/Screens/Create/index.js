@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
 
-const CreatePage = ({scrollTo}) => {
+const CreatePage = ({navigation}) => {
   return (
     <Common.Wrapper>
       <Common.SpaceView>
@@ -41,8 +41,8 @@ const CreatePage = ({scrollTo}) => {
             </Common.ItemBoxBottom>
           </Common.ItemBox>
         </Styles.PreViewBox>
-        <Common.MoveBtn onPress={() => scrollTo('create')}>
-          <Common.MoveBtnText>클릭하여 기록 생성하기</Common.MoveBtnText>
+        <Common.MoveBtn onPress={() => navigation.goBack()}>
+          <Common.MoveBtnText>뒤로 가기</Common.MoveBtnText>
         </Common.MoveBtn>
       </Styles.ContentBox>
     </Common.Wrapper>
