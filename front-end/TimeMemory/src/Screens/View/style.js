@@ -37,6 +37,21 @@ export const SwitchSec = styled.View`
   align-items: center;
 `;
 
+export const SwitchStyle = {
+  containerStyle: {
+    // marginTop: 16,
+    width: 70,
+    height: 35,
+    borderRadius: 25,
+    padding: 5,
+  },
+  circleStyle: {
+    width: 26,
+    height: 26,
+    borderRadius: 20,
+  },
+};
+
 export const ContentBox = styled.View`
   flex: 1;
 `;

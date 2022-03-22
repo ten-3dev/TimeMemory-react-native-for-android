@@ -2,8 +2,8 @@ import React, {useContext, useState} from 'react';
 import {Platform} from 'react-native';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
-import {Switch} from 'react-native-switch';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SwitchToggle from 'react-native-switch-toggle';
 import Context from '../../../Context';
 
 const ViewPage = ({navigation}) => {
@@ -28,29 +28,21 @@ const ViewPage = ({navigation}) => {
         <Styles.SwitchBox>
           <Styles.SwitchSec>
             <Styles.SwitchText>다크모드</Styles.SwitchText>
-            <Switch
-              value={context.getDark}
-              onValueChange={val => {
-                context.setDark(val);
-                AsyncStorage.setItem('darkmode', val ? 'dark' : 'light');
+            <SwitchToggle
+              switchOn={context.getDark}
+              onPress={() => {
+                context.setDark(!context.getDark);
+                AsyncStorage.setItem(
+                  'darkmode',
+                  context.getDark ? 'dark' : 'light',
+                );
               }}
-              circleSize={22}
-              barHeight={30}
-              circleBorderWidth={0}
-              backgroundActive={'#E9E8E8'}
-              backgroundInactive={'#E9E8E8'}
-              circleActiveColor={'#fff'}
-              circleInActiveColor={'#fff'}
-              innerCircleStyle={{
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              renderActiveText={true}
-              renderInActiveText={true}
-              switchLeftPx={5}
-              switchRightPx={5}
-              switchWidthMultiplier={2.8}
-              switchBorderRadius={30}
+              circleColorOff="#fff"
+              circleColorOn="#fff"
+              backgroundColorOn="#E9E8E8"
+              backgroundColorOff="#E9E8E8"
+              containerStyle={Styles.SwitchStyle.containerStyle}
+              circleStyle={Styles.SwitchStyle.circleStyle}
             />
           </Styles.SwitchSec>
         </Styles.SwitchBox>
