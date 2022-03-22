@@ -588,6 +588,6 @@ __d(function(g,r,i,a,m,e,d){Object.defineProperty(e,"__esModule",{value:!0}),e.W
 __d(function(g,r,i,a,m,e,d){m.exports=r(d[0]).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/Assets",width:120,height:120,scales:[1],hash:"8f85941e1cd194adb755a36727879a8a",name:"loading",type:"gif"})},582,[570]);
 __d(function(g,r,i,a,m,e,d){'use strict';Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0;var t=r(d[0]).NativeModules.SplashScreen;e.default=t},583,[1]);
 __d(function(g,r,i,a,m,e,d){Object.defineProperty(e,"__esModule",{value:!0}),e.light=e.dark=void 0;e.light={color:{bg:'#F1F1F1',title:'#000000',btn:'#e4e4e4',item:'#FFFFFF',dateTimeTitle:'#000000',dateTime:'#686868',input:'#000000'}};e.dark={color:{bg:'#616161',title:'#EFEFEF',btn:'#e4e4e4',item:'#8D8D8D',dateTimeTitle:'#FFFFFF',dateTime:'#E1E1E1',input:'#ffffff'}}},584,[]);
-__d(function(e,m,i,o,a,n,r){a.exports={name:"TimeMemory",displayName:"TimeMemory"}},585,[]);
+__d(function(e,m,a,i,n,o,d){n.exports={name:"TimeMemory",displayName:"\uadf8\ub54c \ubb50\ud588\ub0d0? \u314b"}},585,[]);
 __r(51);
 __r(0);
