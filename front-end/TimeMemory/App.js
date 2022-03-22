@@ -13,11 +13,7 @@ const App = () => {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    AsyncStorage.getItem('darkmode', (err, result) => {
-      if (err) throw err;
-      setIsDark(result === null ? false : result === 'light' ? false : true);
-    });
-
+    initAsync();
     setTimeout(() => {
       SplashScreen.hide();
     }, 2000);
@@ -32,6 +28,13 @@ const App = () => {
     },
     getDark: isDark,
     getLoading: isLoading,
+  };
+
+  const initAsync = async () => {
+    await AsyncStorage.getItem('darkmode', (err, result) => {
+      if (!err)
+        setIsDark(result === null ? false : result === 'light' ? false : true);
+    });
   };
 
   return (

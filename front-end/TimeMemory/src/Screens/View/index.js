@@ -1,5 +1,5 @@
-import React, {useContext, useState} from 'react';
-import {Platform} from 'react-native';
+import React, {useContext, useState, useEffect} from 'react';
+import {Platform, Alert, BackHandler} from 'react-native';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -8,6 +8,25 @@ import Context from '../../../Context';
 
 const ViewPage = ({navigation}) => {
   const context = useContext(Context);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('경고', '앱을 종료하시겠습니까?', [
+        {
+          text: '실수로 누름',
+          onPress: () => null,
+        },
+        {text: '응 나갈거야~', onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
 
   // Fake data
   const [data] = useState([
@@ -20,6 +39,11 @@ const ViewPage = ({navigation}) => {
     {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
   ]);
 
+  const changeDark = async () => {
+    context.setDark(!context.getDark);
+    await AsyncStorage.setItem('darkmode', context.getDark ? 'light' : 'dark');
+  };
+
   return (
     <Common.Wrapper>
       <Common.SpaceView>
@@ -30,13 +54,7 @@ const ViewPage = ({navigation}) => {
             <Styles.SwitchText>다크모드</Styles.SwitchText>
             <SwitchToggle
               switchOn={context.getDark}
-              onPress={() => {
-                context.setDark(!context.getDark);
-                AsyncStorage.setItem(
-                  'darkmode',
-                  context.getDark ? 'dark' : 'light',
-                );
-              }}
+              onPress={changeDark}
               circleColorOff="#fff"
               circleColorOn="#fff"
               backgroundColorOn="#E9E8E8"
