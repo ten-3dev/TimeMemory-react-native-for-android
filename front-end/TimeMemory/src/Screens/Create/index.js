@@ -1,22 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Platform, ScrollView} from 'react-native';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
 import moment from 'moment';
+import Context from '../../../Context';
 
 const CreatePage = ({navigation}) => {
+  const context = useContext(Context);
   const [date, setDate] = useState({
     time: '',
     date: '',
   });
   const [text, setText] = useState('');
   useEffect(() => {
+    context.setLoading(true);
     const time = moment().utcOffset('+09:00').format('h시 mm분,A').split(',');
     const date = moment().utcOffset('+09:00').format('YYYY.MM.DD');
     setDate({
       time: time[1] === 'PM' ? '오후 ' + time[0] : '오전 ' + time[0],
       date: date,
     });
+    setTimeout(() => {
+      context.setLoading(false);
+    }, 2000);
   }, []);
   return (
     <ScrollView contentContainerStyle={{flex: 1}}>

@@ -22,5 +22,5 @@ export const CustomGiF = styled.Image`
 export const LoadingText = styled.Text`
   font-size: 12px;
   font-weight: 600;
-  color: black;
+  color: ${props => props.theme.color.title};
 `;

@@ -23,8 +23,8 @@ const App = () => {
     setDark: bool => {
       setIsDark(bool);
     },
-    setLoading: () => {
-      setLoading(!isLoading);
+    setLoading: bool => {
+      setLoading(bool);
     },
     getDark: isDark,
     getLoading: isLoading,
