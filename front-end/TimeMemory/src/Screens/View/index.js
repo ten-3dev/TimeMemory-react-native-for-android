@@ -5,9 +5,22 @@ import * as Common from '../../Styles/common';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SwitchToggle from 'react-native-switch-toggle';
 import Context from '../../../Context';
+import {GetView} from '../../Datas';
+import {useIsFocused} from '@react-navigation/native';
 
 const ViewPage = ({navigation}) => {
   const context = useContext(Context);
+  const screenFocused = useIsFocused();
+  const [viewData, setViewData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      context.setLoading(true);
+      setViewData(await GetView());
+      context.setLoading(false);
+    };
+    if (screenFocused) getData();
+  }, [screenFocused]);
 
   useEffect(() => {
     const backAction = () => {
@@ -27,17 +40,6 @@ const ViewPage = ({navigation}) => {
     );
     return () => backHandler.remove();
   }, []);
-
-  // Fake data
-  const [data] = useState([
-    {text: '123', date: '2022.03.21', time: '오후 3시 28분'},
-    {text: '456', date: '2022.03.21', time: '오후 3시 28분'},
-    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
-    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
-    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
-    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
-    {text: '789', date: '2022.03.21', time: '오후 3시 28분'},
-  ]);
 
   const changeDark = async () => {
     context.setDark(!context.getDark);
@@ -74,19 +76,21 @@ const ViewPage = ({navigation}) => {
       <Styles.ContentBox>
         <Styles.ScrollView
           listViewRef={ref => (scrollRef = ref)}
-          data={data}
+          data={viewData}
           renderItem={itemData => (
             <>
               <Common.ItemBox style={Platform.select(Common.ShadowStyle)}>
                 <Common.ItemBoxTop>
-                  <Common.ItemBoxText>{itemData.item.date}</Common.ItemBoxText>
+                  <Common.ItemBoxText>
+                    {itemData?.item?.date}
+                  </Common.ItemBoxText>
                   <Common.ItemBoxText time>
-                    {itemData.item.time}
+                    {itemData?.item?.time}
                   </Common.ItemBoxText>
                 </Common.ItemBoxTop>
                 <Common.ItemBoxBottom>
                   <Common.ItemBoxTitle>
-                    {itemData.item.text}
+                    {itemData?.item?.context}
                   </Common.ItemBoxTitle>
                 </Common.ItemBoxBottom>
               </Common.ItemBox>
