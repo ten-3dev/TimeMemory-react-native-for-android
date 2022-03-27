@@ -102,5 +102,5 @@ export const NoneDownText = styled.Text`
   color: ${props => props.theme.color.title};
   font-family: 'DoHyeon-Regular';
   position: absolute;
-  bottom: 40px;
+  bottom: 30px;
 `;

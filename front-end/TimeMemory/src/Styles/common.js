@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 export const Wrapper = styled.View`
   flex: 1;
   background-color: ${props => props.theme.color.bg};
+  box-sizing: border-box;
+  padding-top: 10px;
 `;
 
 export const SpaceView = styled.View`
