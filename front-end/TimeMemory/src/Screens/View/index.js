@@ -14,7 +14,10 @@ const ViewPage = ({navigation}) => {
   const [viewData, setViewData] = useState([]);
 
   useEffect(() => {
-    if (screenFocused) getData();
+    if (screenFocused === true) {
+      context.setLoading(true);
+      getData();
+    }
   }, [screenFocused]);
 
   useEffect(() => {
@@ -37,7 +40,6 @@ const ViewPage = ({navigation}) => {
   }, []);
 
   const getData = async () => {
-    context.setLoading(true);
     setViewData(await GetView());
     context.setLoading(false);
   };
@@ -49,8 +51,7 @@ const ViewPage = ({navigation}) => {
 
   const removeHandler = async id => {
     context.setLoading(true);
-    await DeleteRemove({id: id, navigation: navigation});
-    context.setLoading(false);
+    await DeleteRemove(id);
     getData();
   };
 
@@ -82,39 +83,48 @@ const ViewPage = ({navigation}) => {
         <Styles.RemoveBarText>슬라이드로 삭제하기</Styles.RemoveBarText>
       </Common.SpaceView>
       <Styles.ContentBox>
-        <Styles.ScrollView
-          listViewRef={ref => (scrollRef = ref)}
-          data={viewData}
-          renderItem={itemData => (
-            <>
-              <Common.ItemBox style={Platform.select(Common.ShadowStyle)}>
-                <Common.ItemBoxTop>
-                  <Common.ItemBoxText>
-                    {itemData?.item?.date}
-                  </Common.ItemBoxText>
-                  <Common.ItemBoxText time>
-                    {itemData?.item?.time}
-                  </Common.ItemBoxText>
-                </Common.ItemBoxTop>
-                <Common.ItemBoxBottom>
-                  <Common.ItemBoxTitle>
-                    {itemData?.item?.context}
-                  </Common.ItemBoxTitle>
-                </Common.ItemBoxBottom>
-              </Common.ItemBox>
-            </>
-          )}
-          renderHiddenItem={itemdata => (
-            <Styles.ItemRemoveView>
-              <Styles.ItemRemove
-                onPress={() => removeHandler(itemdata.item.id)}>
-                <Styles.ItemRemoveText>삭제</Styles.ItemRemoveText>
-              </Styles.ItemRemove>
-            </Styles.ItemRemoveView>
-          )}
-          rightOpenValue={-108}
-          disableRightSwipe={true}
-        />
+        {viewData.length === 0 ? (
+          <Styles.NoneItemBox>
+            <Styles.NoneCenterText>No Record</Styles.NoneCenterText>
+            <Styles.NoneDownText>
+              아래 버튼을 눌러 시간을 기록하세요.
+            </Styles.NoneDownText>
+          </Styles.NoneItemBox>
+        ) : (
+          <Styles.ScrollView
+            listViewRef={ref => (scrollRef = ref)}
+            data={viewData}
+            renderItem={itemData => (
+              <>
+                <Common.ItemBox style={Platform.select(Common.ShadowStyle)}>
+                  <Common.ItemBoxTop>
+                    <Common.ItemBoxText>
+                      {itemData?.item?.date}
+                    </Common.ItemBoxText>
+                    <Common.ItemBoxText time>
+                      {itemData?.item?.time}
+                    </Common.ItemBoxText>
+                  </Common.ItemBoxTop>
+                  <Common.ItemBoxBottom>
+                    <Common.ItemBoxTitle>
+                      {itemData?.item?.context}
+                    </Common.ItemBoxTitle>
+                  </Common.ItemBoxBottom>
+                </Common.ItemBox>
+              </>
+            )}
+            renderHiddenItem={itemdata => (
+              <Styles.ItemRemoveView>
+                <Styles.ItemRemove
+                  onPress={() => removeHandler(itemdata.item.id)}>
+                  <Styles.ItemRemoveText>삭제</Styles.ItemRemoveText>
+                </Styles.ItemRemove>
+              </Styles.ItemRemoveView>
+            )}
+            rightOpenValue={-108}
+            disableRightSwipe={true}
+          />
+        )}
         <Common.MoveBtn onPress={() => navigation.navigate('Create')}>
           <Common.MoveBtnText>클릭하여 기록 생성하기</Common.MoveBtnText>
         </Common.MoveBtn>
