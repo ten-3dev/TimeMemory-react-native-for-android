@@ -7,6 +7,7 @@ export const light = {
     dateTimeTitle: '#000000',
     dateTime: '#686868',
     input: '#000000',
+    noRecord: '#e32424',
   },
 };
 
@@ -19,5 +20,6 @@ export const dark = {
     dateTimeTitle: '#FFFFFF',
     dateTime: '#E1E1E1',
     input: '#ffffff',
+    noRecord: '#e06363',
   },
 };

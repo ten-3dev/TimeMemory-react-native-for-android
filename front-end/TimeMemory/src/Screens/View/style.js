@@ -82,3 +82,25 @@ export const ItemRemoveText = styled.Text`
   color: #fff;
   font-family: 'DoHyeon-Regular';
 `;
+
+export const NoneItemBox = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
+
+export const NoneCenterText = styled.Text`
+  margin-top: -100px;
+  font-size: 25px;
+  font-family: 'mainFont';
+  color: ${props => props.theme.color.noRecord};
+`;
+
+export const NoneDownText = styled.Text`
+  font-size: 20px;
+  color: ${props => props.theme.color.title};
+  font-family: 'DoHyeon-Regular';
+  position: absolute;
+  bottom: 40px;
+`;
