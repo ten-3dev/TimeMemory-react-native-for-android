@@ -5,7 +5,7 @@ import * as Common from '../../Styles/common';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SwitchToggle from 'react-native-switch-toggle';
 import Context from '../../../Context';
-import {GetView} from '../../Datas';
+import {DeleteRemove, GetView} from '../../Datas';
 import {useIsFocused} from '@react-navigation/native';
 
 const ViewPage = ({navigation}) => {
@@ -14,11 +14,6 @@ const ViewPage = ({navigation}) => {
   const [viewData, setViewData] = useState([]);
 
   useEffect(() => {
-    const getData = async () => {
-      context.setLoading(true);
-      setViewData(await GetView());
-      context.setLoading(false);
-    };
     if (screenFocused) getData();
   }, [screenFocused]);
 
@@ -41,9 +36,22 @@ const ViewPage = ({navigation}) => {
     return () => backHandler.remove();
   }, []);
 
-  const changeDark = async () => {
+  const getData = async () => {
+    context.setLoading(true);
+    setViewData(await GetView());
+    context.setLoading(false);
+  };
+
+  const changeDarkHandler = async () => {
     context.setDark(!context.getDark);
     await AsyncStorage.setItem('darkmode', context.getDark ? 'light' : 'dark');
+  };
+
+  const removeHandler = async id => {
+    context.setLoading(true);
+    await DeleteRemove({id: id, navigation: navigation});
+    context.setLoading(false);
+    getData();
   };
 
   return (
@@ -56,7 +64,7 @@ const ViewPage = ({navigation}) => {
             <Styles.SwitchText>다크모드</Styles.SwitchText>
             <SwitchToggle
               switchOn={context.getDark}
-              onPress={changeDark}
+              onPress={changeDarkHandler}
               circleColorOff="#fff"
               circleColorOn="#fff"
               backgroundColorOn="#E9E8E8"
@@ -96,9 +104,10 @@ const ViewPage = ({navigation}) => {
               </Common.ItemBox>
             </>
           )}
-          renderHiddenItem={() => (
+          renderHiddenItem={itemdata => (
             <Styles.ItemRemoveView>
-              <Styles.ItemRemove>
+              <Styles.ItemRemove
+                onPress={() => removeHandler(itemdata.item.id)}>
                 <Styles.ItemRemoveText>삭제</Styles.ItemRemoveText>
               </Styles.ItemRemove>
             </Styles.ItemRemoveView>
