@@ -10,7 +10,6 @@ export class AppService {
   async create(date: string, time: string, context: string){
     const newApp = new this.AppModel({ date, time, context });
     const result = await newApp.save();
-    console.log(result);
     return result.id as string;
   }
 
