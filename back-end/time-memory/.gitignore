@@ -2,7 +2,6 @@
 /dist
 /node_modules
 *-lock.json
-.env
 
 # Logs
 logs
