@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {Alert, BackHandler} from 'react-native';
 
-const url = 'http://222.104.230.95:3000/';
+const url = 'http://49.50.167.232:3000/';
 
 export const GetView = async () => {
   try {
