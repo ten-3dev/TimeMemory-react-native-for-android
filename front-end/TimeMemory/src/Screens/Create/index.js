@@ -47,8 +47,8 @@ const CreatePage = ({navigation}) => {
           </Styles.DateTimeBox>
           <Styles.InputText>간단한 텍스트</Styles.InputText>
           <Styles.Input
-            placeholder="지금 무얼 하고 있나요? (5자 이상 10자 이하로 작성)"
-            maxLength={10}
+            placeholder="지금 무얼 하고 있나요? (15자 이하로 작성)"
+            maxLength={15}
             onChangeText={e =>
               setData({
                 ...data,
