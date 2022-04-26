@@ -62,7 +62,7 @@ const ViewPage = ({navigation}) => {
       {
         text: '예',
         onPress: async () => {
-          await DeleteRemove(item.id);
+          await DeleteRemove(id);
           getData();
         },
       },
@@ -131,9 +131,7 @@ const ViewPage = ({navigation}) => {
             renderHiddenItem={(rowData, rowMap) => (
               <Styles.ItemRemoveView>
                 <Styles.ItemRemove
-                  onPress={() => {
-                    removeHandler(rowData.item.id);
-                  }}>
+                  onPress={() => removeHandler(rowData.item.id)}>
                   <Styles.ItemRemoveText>삭제</Styles.ItemRemoveText>
                 </Styles.ItemRemove>
               </Styles.ItemRemoveView>
