@@ -40,6 +40,7 @@ const ViewPage = ({navigation}) => {
   }, []);
 
   const getData = async () => {
+    context.setLoading(true);
     setViewData(await GetView());
     context.setLoading(false);
   };
@@ -50,9 +51,22 @@ const ViewPage = ({navigation}) => {
   };
 
   const removeHandler = async id => {
-    context.setLoading(true);
-    await DeleteRemove(id);
-    getData();
+    Alert.alert('경고', '해당 기억을 지우시겠습니까?', [
+      {
+        text: '아니오',
+        onPress: () => {
+          console.log('on');
+          getData();
+        },
+      },
+      {
+        text: '예',
+        onPress: async () => {
+          await DeleteRemove(item.id);
+          getData();
+        },
+      },
+    ]);
   };
 
   return (
@@ -61,6 +75,7 @@ const ViewPage = ({navigation}) => {
         <Common.Title>Time Memory</Common.Title>
         <Common.SubTitle>원하는 시간을 기록하세요!</Common.SubTitle>
         <Styles.SwitchBox>
+          <Styles.CountText>현재 기억 수: {viewData.length}</Styles.CountText>
           <Styles.SwitchSec>
             <Styles.SwitchText>다크모드</Styles.SwitchText>
             <SwitchToggle
@@ -113,10 +128,12 @@ const ViewPage = ({navigation}) => {
                 </Common.ItemBox>
               </>
             )}
-            renderHiddenItem={itemdata => (
+            renderHiddenItem={(rowData, rowMap) => (
               <Styles.ItemRemoveView>
                 <Styles.ItemRemove
-                  onPress={() => removeHandler(itemdata.item.id)}>
+                  onPress={() => {
+                    removeHandler(rowData.item.id);
+                  }}>
                   <Styles.ItemRemoveText>삭제</Styles.ItemRemoveText>
                 </Styles.ItemRemove>
               </Styles.ItemRemoveView>

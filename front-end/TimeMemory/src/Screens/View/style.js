@@ -31,6 +31,15 @@ export const SwitchText = styled.Text`
 export const SwitchBox = styled.View`
   width: 100%;
   align-items: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const CountText = styled.Text`
+  font-size: 14px;
+  color: ${props => props.theme.color.title};
+  margin-top: 5px;
+  font-family: 'DoHyeon-Regular';
 `;
 
 export const SwitchSec = styled.View`
