@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import {Platform, Alert, BackHandler} from 'react-native';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
@@ -50,13 +50,13 @@ const ViewPage = ({navigation}) => {
     await AsyncStorage.setItem('darkmode', context.getDark ? 'light' : 'dark');
   };
 
-  const removeHandler = async id => {
+  const removeHandler = async (rowMap, id) => {
     Alert.alert('경고', '해당 기억을 지우시겠습니까?', [
       {
         text: '아니오',
         onPress: () => {
-          console.log('on');
           getData();
+          rowMap[id].closeRow();
         },
       },
       {
@@ -107,22 +107,22 @@ const ViewPage = ({navigation}) => {
           </Styles.NoneItemBox>
         ) : (
           <Styles.ScrollView
+            keyExtractor={item => item.id}
             listViewRef={ref => (scrollRef = ref)}
             data={viewData}
-            renderItem={itemData => (
+            closeOnRowPress={true}
+            renderItem={data => (
               <>
                 <Common.ItemBox style={Platform.select(Common.ShadowStyle)}>
                   <Common.ItemBoxTop>
-                    <Common.ItemBoxText>
-                      {itemData?.item?.date}
-                    </Common.ItemBoxText>
+                    <Common.ItemBoxText>{data?.item?.date}</Common.ItemBoxText>
                     <Common.ItemBoxText time>
-                      {itemData?.item?.time}
+                      {data?.item?.time}
                     </Common.ItemBoxText>
                   </Common.ItemBoxTop>
                   <Common.ItemBoxBottom>
                     <Common.ItemBoxTitle>
-                      {itemData?.item?.context}
+                      {data?.item?.context}
                     </Common.ItemBoxTitle>
                   </Common.ItemBoxBottom>
                 </Common.ItemBox>
@@ -131,7 +131,7 @@ const ViewPage = ({navigation}) => {
             renderHiddenItem={(rowData, rowMap) => (
               <Styles.ItemRemoveView>
                 <Styles.ItemRemove
-                  onPress={() => removeHandler(rowData.item.id)}>
+                  onPress={() => removeHandler(rowMap, rowData.item.id)}>
                   <Styles.ItemRemoveText>삭제</Styles.ItemRemoveText>
                 </Styles.ItemRemove>
               </Styles.ItemRemoveView>

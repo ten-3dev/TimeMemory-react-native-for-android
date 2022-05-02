@@ -51,7 +51,7 @@ const CreatePage = ({navigation}) => {
           <Styles.Input
             placeholder="지금 무얼 하고 있나요? (15자 이하로 작성)"
             maxLength={15}
-            inputRef={inputRef}
+            ref={inputRef}
             onChangeText={e =>
               setData({
                 ...data,
