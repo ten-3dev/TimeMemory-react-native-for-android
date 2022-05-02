@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useRef} from 'react';
 import {Alert, Platform, ScrollView} from 'react-native';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
@@ -8,6 +8,7 @@ import Context from '../../../Context';
 
 const CreatePage = ({navigation}) => {
   const context = useContext(Context);
+  const inputRef = useRef();
 
   const [data, setData] = useState({
     time: '',
@@ -22,6 +23,7 @@ const CreatePage = ({navigation}) => {
       time: time[1] === 'PM' ? '오후 ' + time[0] : '오전 ' + time[0],
       date: date,
     });
+    inputRef.current.focus();
   }, []);
 
   const getData = async () => {
@@ -49,6 +51,7 @@ const CreatePage = ({navigation}) => {
           <Styles.Input
             placeholder="지금 무얼 하고 있나요? (15자 이하로 작성)"
             maxLength={15}
+            inputRef={inputRef}
             onChangeText={e =>
               setData({
                 ...data,
