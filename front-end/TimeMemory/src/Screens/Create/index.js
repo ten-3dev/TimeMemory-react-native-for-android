@@ -17,8 +17,10 @@ const CreatePage = ({navigation}) => {
   });
 
   useEffect(() => {
+    const dayLabelArr = ['일', '월', '화', '수', '목', '금', '토'];
+    const dayLabel = " " + dayLabelArr[new Date().getDay()];
     const time = moment().utcOffset('+09:00').format('h시 mm분,A').split(',');
-    const date = moment().utcOffset('+09:00').format('YYYY.MM.DD');
+    const date = moment().utcOffset('+09:00').format('YYYY.MM.DD') + dayLabel;
     setData({
       time: time[1] === 'PM' ? '오후 ' + time[0] : '오전 ' + time[0],
       date: date,
