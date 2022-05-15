@@ -5,6 +5,18 @@ export const DateTimeBox = styled.View`
   margin-bottom: 25px;
 `;
 
+export const TagsSelectBtn = styled.TouchableOpacity`
+  width: 50px;
+  height: 28px;
+  background-color: blue;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 2px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 2px;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const DateTimeTitle = styled.Text`
   font-size: 17px;
   margin-top: 30px;
@@ -74,4 +86,5 @@ export const PreViewTitle = styled.Text`
   margin-bottom: 4px;
   margin-left: 8px;
   font-family: 'mainFont';
+  color: ${props => props.theme.color.input};
 `;

@@ -18,7 +18,6 @@ export const GetView = async () => {
 
 export const PostCreate = async ({arg, navigation}) => {
   try {
-    console.log(arg);
     await axios.post(url + 'create', arg);
     Alert.alert('알림', '생성 완료', [
       {text: 'View 화면으로 이동', onPress: () => navigation.navigate('View')},

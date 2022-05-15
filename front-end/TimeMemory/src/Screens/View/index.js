@@ -52,9 +52,9 @@ const ViewPage = ({navigation}) => {
   };
 
   const removeHandler = async (rowMap, id, isIdx) => {
+    rowMap[id].closeRow();
     if (isIdx != -1) setIdArr(idArr.filter((v, idx) => idx != isIdx));
     else setIdArr(idArr => [...idArr, id]);
-    rowMap[id].closeRow();
   };
 
   const removeExeHandler = async () => {
