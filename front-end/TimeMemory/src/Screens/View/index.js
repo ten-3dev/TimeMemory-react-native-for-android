@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
-import {Platform, Alert, BackHandler} from 'react-native';
+import {Alert, BackHandler} from 'react-native';
 import * as Styles from './style';
 import * as Common from '../../Styles/common';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,6 +12,7 @@ const ViewPage = ({navigation}) => {
   const context = useContext(Context);
   const screenFocused = useIsFocused();
   const [viewData, setViewData] = useState([]);
+  const [idArr, setIdArr] = useState([]);
 
   useEffect(() => {
     if (screenFocused === true) {
@@ -50,19 +51,28 @@ const ViewPage = ({navigation}) => {
     await AsyncStorage.setItem('darkmode', context.getDark ? 'light' : 'dark');
   };
 
-  const removeHandler = async (rowMap, id) => {
-    Alert.alert('경고', '해당 기억을 지우시겠습니까?', [
+  const removeHandler = async (rowMap, id, isIdx) => {
+    if (isIdx != -1) setIdArr(idArr.filter((v, idx) => idx != isIdx));
+    else setIdArr(idArr => [...idArr, id]);
+    rowMap[id].closeRow();
+  };
+
+  const removeExeHandler = async () => {
+    Alert.alert('경고', `총 ${idArr.length}개의 기억을 지우시겠습니까?`, [
       {
         text: '아니오',
         onPress: () => {
           getData();
-          rowMap[id].closeRow();
         },
       },
       {
         text: '예',
         onPress: async () => {
-          await DeleteRemove(id);
+          context.setLoading(true);
+          for (let i = 0; i < idArr.length; i++) {
+            await DeleteRemove(idArr[i]);
+          }
+          setIdArr([]);
           getData();
         },
       },
@@ -112,27 +122,39 @@ const ViewPage = ({navigation}) => {
             data={viewData}
             closeOnRowPress={true}
             renderItem={data => (
-              <>
-                <Common.ItemBox style={Platform.select(Common.ShadowStyle)}>
-                  <Common.ItemBoxTop>
-                    <Common.ItemBoxText>{data?.item?.date}</Common.ItemBoxText>
-                    <Common.ItemBoxText time>
-                      {data?.item?.time}
-                    </Common.ItemBoxText>
-                  </Common.ItemBoxTop>
-                  <Common.ItemBoxBottom>
-                    <Common.ItemBoxTitle>
-                      {data?.item?.context}
-                    </Common.ItemBoxTitle>
-                  </Common.ItemBoxBottom>
-                </Common.ItemBox>
-              </>
+              <Common.ItemBox
+                style={
+                  idArr.indexOf(data?.item?.id) != -1
+                    ? Common.ShadowStyle.selected
+                    : Common.ShadowStyle.original
+                }>
+                <Common.ItemBoxTop>
+                  <Common.ItemBoxText>{data?.item?.date}</Common.ItemBoxText>
+                  <Common.ItemBoxText time>
+                    {data?.item?.time}
+                  </Common.ItemBoxText>
+                </Common.ItemBoxTop>
+                <Common.ItemBoxBottom>
+                  <Common.ItemBoxTitle>
+                    {data?.item?.context}
+                  </Common.ItemBoxTitle>
+                </Common.ItemBoxBottom>
+              </Common.ItemBox>
             )}
             renderHiddenItem={(rowData, rowMap) => (
               <Styles.ItemRemoveView>
                 <Styles.ItemRemove
-                  onPress={() => removeHandler(rowMap, rowData.item.id)}>
-                  <Styles.ItemRemoveText>삭제</Styles.ItemRemoveText>
+                  remove={idArr.indexOf(rowData.item.id) != -1}
+                  onPress={() => {
+                    removeHandler(
+                      rowMap,
+                      rowData.item.id,
+                      idArr.indexOf(rowData.item.id),
+                    );
+                  }}>
+                  <Styles.ItemRemoveText>
+                    {idArr.indexOf(rowData.item.id) != -1 ? '취소' : '삭제'}
+                  </Styles.ItemRemoveText>
                 </Styles.ItemRemove>
               </Styles.ItemRemoveView>
             )}
@@ -140,8 +162,15 @@ const ViewPage = ({navigation}) => {
             disableRightSwipe={true}
           />
         )}
-        <Common.MoveBtn onPress={() => navigation.navigate('Create')}>
-          <Common.MoveBtnText>클릭하여 기록 생성하기</Common.MoveBtnText>
+        <Common.MoveBtn
+          onPress={
+            idArr.length === 0
+              ? () => navigation.navigate('Create')
+              : removeExeHandler
+          }>
+          <Common.MoveBtnText>
+            {idArr.length === 0 ? '클릭하여 기록 생성하기' : '삭제하기'}
+          </Common.MoveBtnText>
         </Common.MoveBtn>
       </Styles.ContentBox>
     </Common.Wrapper>

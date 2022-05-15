@@ -48,7 +48,6 @@ export const SwitchSec = styled.View`
 
 export const SwitchStyle = {
   containerStyle: {
-    // marginTop: 16,
     width: 70,
     height: 35,
     borderRadius: 25,
@@ -66,6 +65,7 @@ export const ContentBox = styled.View`
 `;
 
 export const ScrollView = styled(SwipeListView)`
+  padding-top: 5px;
   padding-bottom: 10px;
   box-sizing: border-box;
 `;
@@ -79,7 +79,10 @@ export const ItemRemoveView = styled.View`
 export const ItemRemove = styled.TouchableOpacity`
   width: 100px;
   height: 100%;
-  background-color: #ff5858;
+  background-color: ${props => {
+    if (props.remove) return 'blue';
+    else return '#ff5858';
+  }};
   border-radius: 5px;
   align-items: center;
   justify-content: center;

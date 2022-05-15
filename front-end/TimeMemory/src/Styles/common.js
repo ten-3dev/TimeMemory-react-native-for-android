@@ -88,27 +88,12 @@ export const MoveBtnText = styled.Text`
   font-family: 'DoHyeon-Regular';
 `;
 
-export const shadowIOS = {
-  shadowColor: 'rgb(50, 50, 50)',
-  shadowOpacity: 0.5,
-  shadowRadius: 5,
-  shadowOffset: {
-    height: -1,
-    width: 0,
-  },
-};
-
 export const ShadowStyle = {
-  ios: {
-    shadowColor: 'rgb(50, 50, 50)',
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    shadowOffset: {
-      height: -1,
-      width: 0,
-    },
+  selected: {
+    elevation: 5,
+    shadowColor: 'red',
   },
-  android: {
-    elevation: 3,
+  original: {
+    elevation: 5,
   },
 };
